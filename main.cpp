@@ -82,5 +82,5 @@ Player* get_player( int& i )
 
 void high_scores( Player** players, int num_players )
 {
-
+    cout << "Score not saved...\n";
 }

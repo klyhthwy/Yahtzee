@@ -31,6 +31,7 @@ debug: clean $(BUILD_DIR)/$(OUTPUT_BIN)
 
 release: CFLAGS += -DNDEBUG -O3
 release: clean $(BUILD_DIR)/$(OUTPUT_BIN)
+	sudo $(CP) $(BUILD_DIR)/$(OUTPUT_BIN) $(RELEASE_DIR)/$(OUTPUT_BIN)
 
 $(BUILD_DIR):
 	$(MK) $@
