@@ -10,8 +10,8 @@ CFLAGS := -c -Wall
 LDFLAGS := 
 
 BUILD_DIR := build
-RELEASE_DIR := /usr/bin
-OUTPUT_BIN := Yahtzee
+RELEASE_DIR := /usr/local/bin
+OUTPUT_BIN := yahtzee
 
 INCLUDE_PATH := 
 
@@ -31,6 +31,9 @@ debug: clean $(BUILD_DIR)/$(OUTPUT_BIN)
 
 release: CFLAGS += -DNDEBUG -O3
 release: clean $(BUILD_DIR)/$(OUTPUT_BIN)
+
+.PHONY: install
+install: $(BUILD_DIR)/$(OUTPUT_BIN)
 	sudo $(CP) $(BUILD_DIR)/$(OUTPUT_BIN) $(RELEASE_DIR)/$(OUTPUT_BIN)
 
 $(BUILD_DIR):
@@ -43,5 +46,6 @@ $(BUILD_DIR)/%.o: %.cpp
 $(BUILD_DIR)/$(OUTPUT_BIN): $(BUILD_DIR) $(SOURCE_OBJECTS)
 	$(CC) $(LDFLAGS) $(SOURCE_OBJECTS) -o $@
 
+.PHONY: clean
 clean:
 	$(RM) $(BUILD_DIR)
