@@ -1,15 +1,10 @@
-CCPATH := /usr/gcc-5.1.0/bin
-CCBIN := g++-5.1.0
-
-CC := $(CCPATH)/$(CCBIN)
 RM := rm -rf
 MK := mkdir
 CP := cp -v
 
-CFLAGS := -c -Wall
-LDFLAGS := 
+CFLAGS := -c
 
-BUILD_DIR := build
+BUILD_DIR := _build
 RELEASE_DIR := /usr/local/bin
 OUTPUT_BIN := yahtzee
 
@@ -33,18 +28,18 @@ release: CFLAGS += -DNDEBUG -O3
 release: clean $(BUILD_DIR)/$(OUTPUT_BIN)
 
 .PHONY: install
-install: $(BUILD_DIR)/$(OUTPUT_BIN)
+install: release
 	sudo $(CP) $(BUILD_DIR)/$(OUTPUT_BIN) $(RELEASE_DIR)/$(OUTPUT_BIN)
 
 $(BUILD_DIR):
 	$(MK) $@
 
 $(BUILD_DIR)/%.o: %.cpp
-	$(CC) $(CFLAGS) $(INCLUDE_PATH) -M $< -MF $(@:.o=.d) -MT $@
-	$(CC) $(CFLAGS) $(INCLUDE_PATH) -c -o $@ $<
+	c++ $(CFLAGS) $(INCLUDE_PATH) -M $< -MF $(@:.o=.d) -MT $@
+	c++ $(CFLAGS) $(INCLUDE_PATH) -c -o $@ $<
 
 $(BUILD_DIR)/$(OUTPUT_BIN): $(BUILD_DIR) $(SOURCE_OBJECTS)
-	$(CC) $(LDFLAGS) $(SOURCE_OBJECTS) -o $@
+	c++ $(LDFLAGS) $(SOURCE_OBJECTS) -o $@
 
 .PHONY: clean
 clean:
