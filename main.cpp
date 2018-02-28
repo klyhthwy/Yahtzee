@@ -52,7 +52,7 @@ int main()
     {
         delete players[i];
     }
-    delete players;
+    delete[] players;
 }
 
 int get_num_players()
