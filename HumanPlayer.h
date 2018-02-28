@@ -6,11 +6,11 @@
 class HumanPlayer: public Player
 {
 public:
-	HumanPlayer( char* );
-	virtual void turn( Yahtzee& );
-	char options( const Yahtzee& ) const;
+    HumanPlayer(char *);
+    virtual void turn(Yahtzee &);
+    char options(const Yahtzee &) const;
 private:
-	bool get_holds( char[] ) const;
+    bool get_holds(char[]) const;
 };
 
 #endif
